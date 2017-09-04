@@ -5,6 +5,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 
+import com.a700apps.techmart.dagger.Application.component.ApplicationComponent;
+import com.a700apps.techmart.dagger.Application.component.DaggerApplicationComponent;
+import com.a700apps.techmart.dagger.Application.module.ContextModule;
+import com.a700apps.techmart.service.ApiService;
+
 import timber.log.Timber;
 
 /**
@@ -16,12 +21,26 @@ public class TechMartApp extends Application {
     private static Context appContext;
 
 
+    public static TechMartApp get(Context context) {
+        return (TechMartApp) context.getApplicationContext();
+    }
+
+
+    private ApiService mApiService;
     @Override
     public void onCreate() {
         super.onCreate();
         appContext = this;
         // initialize debug.
         Timber.plant(new Timber.DebugTree());
+
+
+        ApplicationComponent applicationComponent = DaggerApplicationComponent.builder()
+                .contextModule(new ContextModule(this))
+                .build();
+
+        mApiService = applicationComponent.getService();
+
     }
 
     @Override
@@ -40,4 +59,10 @@ public class TechMartApp extends Application {
     public static Context getAppContext() {
         return appContext;
     }
+
+    public ApiService getApiService(){
+        return mApiService;
+    }
+
+
 }
