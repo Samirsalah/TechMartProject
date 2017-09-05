@@ -32,17 +32,19 @@ import java.io.InputStream;
 
 public class RegisterActivity extends Activity implements RegisterView, View.OnClickListener {
 
-    EditText mFullNameEditText, mPhoneNumberEditText, mEmailEditText, mPasswordEditText;
+     EditText mFullNameEditText, mPhoneNumberEditText, mEmailEditText, mPasswordEditText;
     private static final int SELECT_PICTURE = 1;
     private long selectedImageSize;
     private String selectedImagePath;
+    private RegisterPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         findViews();
-//        presenter = new LoginPresenter();
+        presenter = new RegisterPresenter();
 //        presenter.attachView(this);
         ActivityUtils.hideKeyboard(this);
     }
@@ -195,6 +197,8 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
                 }
 
                 openCouncilActivity();
+
+                presenter.register(fullName, password, email, mobile, referralCode);
                 break;
             default:
                 break;
