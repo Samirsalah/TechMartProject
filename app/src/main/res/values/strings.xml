@@ -76,5 +76,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="singn_in">SIGN IN</string>
+    <string name="company">Company Name</string>
+    <string name="hint_company">enter your company name</string>
+    <string name="company_position">Position</string>
+    <string name="hint_position">enter your company position</string>
+    <string name="company_length_not_valid">Please enter valid name</string>
+    <string name="position_length_not_valid">Please enter valid position</string>
 
 </resources>

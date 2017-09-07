@@ -26,6 +26,7 @@ import android.util.Log;
 
 
 import com.a700apps.techmart.R;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -48,14 +49,14 @@ import java.util.TimeZone;
 public class AppUtils {
 
 
-//    public static String getFirebaseToken() {
-//        return FirebaseInstanceId.getInstance().getToken();
-//    }
+    public static String getFirebaseToken() {
+        return FirebaseInstanceId.getInstance().getToken();
+    }
 
 
-//    public static String getDeviceId() {
-//        return FirebaseInstanceId.getInstance().getId();
-//    }
+    public static String getDeviceId() {
+        return FirebaseInstanceId.getInstance().getId();
+    }
 
     public static boolean isInternetAvailable(Context context) {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));

@@ -10,12 +10,13 @@ import org.json.JSONObject;
 public class MainApiHelper {
 
 
-    public static JSONObject createRegisterBody(String fullName, String password, String email,
+    public static JSONObject createRegisterBody(String fullName, String password, String email,String mobile,
                                                 String photo, String companyName, String position,
                                                  String deviceId, String pnToken) throws JSONException {
         JSONObject body = new JSONObject();
         body.put("Name", fullName);
         body.put("Password", password);
+        body.put("Phone", mobile);
         body.put("Email", email);
         body.put("Photo", photo);
         body.put("Company", companyName);

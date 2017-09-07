@@ -17,6 +17,7 @@ import com.a700apps.techmart.ui.screens.register.RegisterActivity;
 import com.a700apps.techmart.utils.ActivityUtils;
 import com.a700apps.techmart.utils.AppUtils;
 import com.a700apps.techmart.utils.Validator;
+import com.wang.avi.AVLoadingIndicatorView;
 
 /**
  * Created by samir salah on 8/14/2017.
@@ -28,6 +29,7 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     //Objects.
     private LoginPresenter presenter;
     private ProgressDialog progressDialog;
+    public AVLoadingIndicatorView indicatorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
         passwordEditText = ActivityUtils.findView(this, R.id.et_pass, EditText.class);
         Button loginButton = ActivityUtils.findView(this, R.id.btn_sign_in, Button.class);
         Button SignButton = ActivityUtils.findView(this, R.id.btn_register, Button.class);
+        indicatorView= (AVLoadingIndicatorView) findViewById(R.id.avi);
         loginButton.setOnClickListener(this);
         SignButton.setOnClickListener(this);
 
@@ -50,11 +53,14 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
 
     @Override
     public void showProgress() {
+        indicatorView.setVisibility(View.VISIBLE);
+        indicatorView.show();
 
     }
 
     @Override
     public void dismissProgress() {
+        indicatorView.hide();
 
     }
 
@@ -103,7 +109,8 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
                 return;
             }
 
-            openHomeActivity();
+            // login click.
+            presenter.login(email, password);
         } else if (viewId == R.id.btn_register) {
             openRegisterActivity();
         }

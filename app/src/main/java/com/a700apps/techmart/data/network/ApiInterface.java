@@ -1,5 +1,6 @@
 package com.a700apps.techmart.data.network;
 
+import com.a700apps.techmart.data.model.CategoryData;
 import com.a700apps.techmart.data.model.UserData;
 
 import okhttp3.RequestBody;
@@ -25,6 +26,10 @@ import rx.Observable;
 
     @POST("forgetuserpassword")
     Observable<Error> forgetPassword(@Body RequestBody body);
+
+   @POST("GetCategory")
+   Observable<CategoryData> getCategory(@Body RequestBody body);
+
 
 
 

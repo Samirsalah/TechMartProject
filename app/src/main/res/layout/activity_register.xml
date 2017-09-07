@@ -79,35 +79,35 @@
                     android:text="OR"
                     android:textColor="@color/button_light_text" />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:orientation="vertical">
-
-
-            <Button
-                    android:id="@+id/btn_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/bt_signuplinkd"
-                    android:gravity="center"
-                    android:paddingLeft="@dimen/general_margin"
-                    android:text="REGISTER NOW"
-                    android:textColor="@color/button_light_text" />
-
-                <ImageView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/arrow_signup" />
+                    android:layout_weight="5"
+                    android:orientation="vertical">
 
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btn_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/bt_signuplinkd"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/general_margin"
+                        android:text="REGISTER NOW"
+                        android:textColor="@color/button_light_text" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="12dp"
+                        android:background="@drawable/arrow_signup" />
+
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -115,7 +115,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear_horizontal"
-                android:layout_centerInParent="true"
                 android:layout_marginBottom="@dimen/Register_body_container_margin"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
@@ -266,6 +265,76 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:gravity="left"
+                        android:text="@string/company"
+                        android:textColor="@color/button_light_text"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_company_name"
+                        style="@style/EditTextRegisterTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/hint_company"
+                        android:inputType="text"
+                        android:maxLines="1"
+
+                        android:textColorHint="@color/about_row_grey" />
+
+                    <View
+                        style="@style/temSepatator"
+                        android:layout_below="@+id/et_pass"
+                        android:layout_marginTop="3dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="left"
+                        android:text="@string/company_position"
+                        android:textColor="@color/button_light_text"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_company_position"
+                        style="@style/EditTextRegisterTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/hint_position"
+                        android:inputType="text"
+                        android:maxLines="1"
+
+                        android:textColorHint="@color/about_row_grey" />
+
+                    <View
+                        style="@style/temSepatator"
+                        android:layout_below="@+id/et_pass"
+                        android:layout_marginTop="3dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:gravity="left"
                         android:text="@string/upload_pic"
                         android:textColor="@color/button_light_text"
                         android:textSize="@dimen/time_text"
@@ -306,7 +375,15 @@
 
             </LinearLayout>
 
-
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avi"
+                style="@style/AVLoadingIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:indicatorColor="your color"
+               android:layout_centerInParent="true"
+                app:indicatorName="BallSpinFadeLoaderIndicator" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

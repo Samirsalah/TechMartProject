@@ -21,6 +21,7 @@ import com.a700apps.techmart.ui.screens.login.LoginPresenter;
 import com.a700apps.techmart.utils.ActivityUtils;
 import com.a700apps.techmart.utils.AppUtils;
 import com.a700apps.techmart.utils.Validator;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.File;
 import java.io.InputStream;
@@ -32,12 +33,13 @@ import java.io.InputStream;
 
 public class RegisterActivity extends Activity implements RegisterView, View.OnClickListener {
 
-     EditText mFullNameEditText, mPhoneNumberEditText, mEmailEditText, mPasswordEditText;
+     EditText mFullNameEditText, mPhoneNumberEditText, mEmailEditText, mPasswordEditText,mCompanyEditText,mPositionEditText;
     private static final int SELECT_PICTURE = 1;
     private long selectedImageSize;
     private String selectedImagePath;
     private RegisterPresenter presenter;
-
+    public AVLoadingIndicatorView indicatorView;
+    Button mLinkedInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
         setContentView(R.layout.activity_register);
         findViews();
         presenter = new RegisterPresenter();
-//        presenter.attachView(this);
+        presenter.attachView(this);
         ActivityUtils.hideKeyboard(this);
     }
 
@@ -56,6 +58,10 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
         mPhoneNumberEditText = ActivityUtils.findView(this, R.id.et_mobile, EditText.class);
         mEmailEditText = ActivityUtils.findView(this, R.id.et_email, EditText.class);
         mPasswordEditText = ActivityUtils.findView(this, R.id.et_pass, EditText.class);
+        mCompanyEditText = ActivityUtils.findView(this, R.id.et_company_name, EditText.class);
+        mPositionEditText = ActivityUtils.findView(this, R.id.et_company_position, EditText.class);
+        mLinkedInButton= ActivityUtils.findView(this, R.id.et_company_position, Button.class);
+        indicatorView= (AVLoadingIndicatorView) findViewById(R.id.avi);
         SignButton.setOnClickListener(this);
         attachButton.setOnClickListener(this);
     }
@@ -148,6 +154,8 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
                 String password = ActivityUtils.getViewTextValue(mPasswordEditText);
                 String email = ActivityUtils.getViewTextValue(mEmailEditText);
                 String mobile = ActivityUtils.getViewTextValue(mPhoneNumberEditText);
+                String company = ActivityUtils.getViewTextValue(mCompanyEditText);
+                String position = ActivityUtils.getViewTextValue(mPositionEditText);
 
                 if (selectedImagePath != null) {
                     if (accept(selectedImagePath)) {
@@ -188,6 +196,17 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
                     mPhoneNumberEditText.setError(getResources().getString(R.string.invalid_mobile_number));
                     return;
                 }
+                boolean validCompanyName= Validator.isTextEmpty(company);
+                if (validCompanyName) {
+                    mCompanyEditText.setError(getResources().getString(R.string.company_length_not_valid));
+                    return;
+                }
+
+                boolean validCompanyPosition= Validator.isTextEmpty(position);
+                if (validCompanyPosition) {
+                    mPositionEditText.setError(getResources().getString(R.string.position_length_not_valid));
+                    return;
+                }
 
 
                 if (!AppUtils.isInternetAvailable(RegisterActivity.this)) {
@@ -196,9 +215,9 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
                     return;
                 }
 
-                openCouncilActivity();
+//                openCouncilActivity();
 
-                presenter.register(fullName, password, email, mobile, referralCode);
+                presenter.register(fullName, password, email, mobile,selectedImagePath,  company, position);
                 break;
             default:
                 break;
@@ -221,5 +240,18 @@ public class RegisterActivity extends Activity implements RegisterView, View.OnC
     @Override
     public void openCouncilActivity() {
         ActivityUtils.openActivity(RegisterActivity.this, CategoryActivity.class, false);
+    }
+
+    @Override
+    public void showLoadingProgress() {
+        indicatorView.setVisibility(View.VISIBLE);
+        indicatorView.show();
+
+    }
+
+    @Override
+    public void dismissLoadingProgress() {
+        indicatorView.hide();
+
     }
 }

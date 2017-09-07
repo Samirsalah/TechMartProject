@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.a700apps.techmart.ui.screens.login.LoginActivity;
 import com.a700apps.techmart.utils.ActivityUtils;
+import com.a700apps.techmart.utils.AppUtils;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
@@ -25,6 +27,13 @@ public class SplashActivity extends Activity implements SplashView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
+
+        try {
+            AppUtils.getFirebaseToken();
+            Log.e("Token", AppUtils.getFirebaseToken());
+        }catch (Exception e){
+
+        }
 
         mPresenter = new SplashPresenter();
         mPresenter.attachView(this);

@@ -7,4 +7,7 @@ package com.a700apps.techmart.ui.screens.register;
  public  interface RegisterView {
 
  void openCouncilActivity();
+ void showLoadingProgress();
+
+ void dismissLoadingProgress();
 }
